@@ -1,12 +1,16 @@
 import React from "react";
 import AddMeal from "./AddMeal.jsx";
+import SaveMeal from "./SaveMeal.jsx"
+
 
 class DailyFood extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      toggle: false,
       totalCal: 0,
-      meals: [{ meal: "", calories: "" }],
+      trip: '',
+      meals: [{ meal: "", calories: "" }]
     };
     this.handleMeal = this.handleMeal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,39 +29,71 @@ class DailyFood extends React.Component {
   }
 
   handleChange(e) {
-    if (["meal", "caloires"].includes(e.target.name)) {
+    if (["meal", "calories"].includes(e.target.name)) {
       let meals = [...this.state.meals];
       meals[e.target.dataset.id][e.target.className] = e.target.value;
       this.setState({ meals });
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
+    this.setState({[e.target.name]: e.target.value })
+
   }
 
   handleMealSumbit(){
-    this.state.meals((number)=>{
-      console.log(number)
+    var output = []
+    this.state.meals.map((number)=>{
+      output.push(Number(number.calories))
+
     })
+   var sum = output.reduce((a, b) => a + b, 0)
+   this.setState({
+        totalCal: sum
+      }, ()=> {
+        if(this.state.totalCal >= 3000){
+          this.setState({
+            toggle: true
+          })
+        }
+      })
+
+
+
+  }
+
+  componentDidUpdate(){
+    if(this.state.totalCal >= 3000){
+      return(
+       <SaveMeal/>
+      )
+    }
+
   }
 
 
 
   render() {
     let { meals } = this.state;
+      let calMet = this.state.toggle
+     let button
+     if(calMet) {
+       button = <SaveMeal meals={this.state}/>
+     }
 
     return (
       <div>
         <div>
           <h2>Daily Food</h2>
-          <h3>Total Calories / Day {this.state.totalCal}</h3>
+          <h3>Total Calories / Day - {this.state.totalCal}</h3>
+          {button}
         </div>
         <div>
-          <form className= 'mealForm' onSubmit={this.handleSubmit}>
+          <form className= 'mealForm' /*onSubmit={this.handleSubmit}*/>
             <label>
               Trip Name
-              <input type="text" name="Meal" />
+              <input type="text" onChange={this.handleChange} name="trip" />
             </label>
-            <input type="submit" value="Submit" />
+            {/* <input type="submit" value="Submit" /> */}
             <br/><br/>
 
             <button onClick={this.handleMeal}>Add new Meal</button>
@@ -82,7 +118,7 @@ class DailyFood extends React.Component {
                   <input
                     type="text"
                     onChange={this.handleChange}
-                    name={"caloires"}
+                    name={"calories"}
                     data-id={index}
                     //  id={calId}
                     className="calories"
