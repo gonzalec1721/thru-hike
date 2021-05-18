@@ -6,3 +6,6 @@ ReactDOM.render(
   <App />,
   document.getElementById('app')
 );
+
+//import Provider and wrap your app in it
+//then wrap it in router

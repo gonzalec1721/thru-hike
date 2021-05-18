@@ -28,7 +28,7 @@ class App extends React.Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/daily_food">Daily Food</Link>
+              <Link to="/dailyfood">Daily Food</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
@@ -39,13 +39,13 @@ class App extends React.Component {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/daily_food">
+          <Route exact path="/dailyfood">
             <DailyFood />
           </Route>
-          <Route path="/users">
+          <Route exact path="/users">
             <Users />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>
@@ -55,12 +55,18 @@ class App extends React.Component {
   }
 }
 function Home() {
-  return <h2>Home</h2>
+  return (
+    <div>
+  <h2>Home</h2>
+  <p>In a single day of thru-hiking one can burn around 6,000 calories. A struggle for many is planning and making sure you have enough food avaialable for the enitre trip.</p>
+  <p>This simple web-app will let you plan meals and make sure you have adecuate caloires per day</p>
+  </div>
+  )
 }
 
-function About() {
-  return <DailyFood/>
-}
+// function dailyfood() {
+//   return <DailyFood/>
+// }
 
 function Users() {
   return <h2>Users</h2>;

@@ -4,10 +4,14 @@ const path = require('path');
 
 const port = 4000;
 
-app.use(express.static(path.join(__dirname, '..')));
 
-app.use('/', (req, res) => {
-  res.render('index.html')
+
+app.use(express.static(path.join(__dirname, '/../client/dist')));
+
+app.get('/*', function(req, res) {
+  var filePath = 'thru-hike/client/dist/index.html'
+  var resolvedPath = path.resolve(filePath);
+  console.log()
 })
 
 
