@@ -1,5 +1,6 @@
 import React from 'react';
 import DailyFood from './DailyFood.jsx';
+import AllMeals from './AllMeals.jsx'
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,7 +32,7 @@ class App extends React.Component {
               <Link to="/dailyfood">Daily Food</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/Meals">Meals</Link>
             </li>
           </ul>
         </nav>
@@ -42,8 +43,8 @@ class App extends React.Component {
           <Route exact path="/dailyfood">
             <DailyFood />
           </Route>
-          <Route exact path="/users">
-            <Users />
+          <Route exact path="/Meals">
+            <AllMeals />
           </Route>
           <Route exact path="/">
             <Home />
@@ -69,7 +70,7 @@ function Home() {
 // }
 
 function Users() {
-  return <h2>Users</h2>;
+  return <h2>Meals</h2>;
 }
 
 export default App;

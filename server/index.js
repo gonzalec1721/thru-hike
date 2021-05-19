@@ -18,11 +18,13 @@ const port = 4000;
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 app.get('/*', function(req, res) {
+  let trip = req.query.trip
   var filePath = 'thru-hike/client/dist/index.html'
   var resolvedPath = path.resolve(filePath);
-  db.getMeals(function(result){
-    // console.log(result)
-  })
+ /*db.getMeals(trip, function(trip){
+   res.status(200).send(trip)
+ })*/
+    //console.log('server',result)
 
 })
 
@@ -33,9 +35,10 @@ res.status(200).send('sent')
 })
 
 /*app.get('/allmeals', (req, res) => {
-   db.getMeals(function(result){
-     console.log(result)
-   })
+  let trip = req.query.trip
+  db.getMeals(trip, function(trip){
+    res.status(200).send(trip)
+  })
 
 })*/
 

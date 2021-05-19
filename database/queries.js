@@ -36,14 +36,17 @@ var calories = el.calories
       })
 }
 
-const getMeals = (callback) => {
-  // console.log(req)
+const getMeals = function(tripName, callback) {
+
   // const { trip, totalCal, meals } = req
-   pool.query("SELECT * FROM dailymeal WHERE trip = 'Hike'", (error, results) => {
+  var hike = tripName
+
+   pool.query("SELECT * FROM dailymeal WHERE trip = $1", [hike],(error, results) => {
      if (error) {
        throw error
      }
-   callback(results.rows)
+  //  console.log(results.rows)
+  callback(results.rows)
    })
  }
 
