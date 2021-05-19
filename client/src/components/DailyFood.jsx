@@ -81,22 +81,21 @@ class DailyFood extends React.Component {
      }
 
     return (
-      <div>
+      <div className='dailyfoodcomp' id ='container'>
         <div>
           <h2>Daily Food</h2>
           <h3>Total Calories / Day - {this.state.totalCal}</h3>
           {button}
         </div>
         <div>
-          <form className= 'mealForm' /*onSubmit={this.handleSubmit}*/>
+          {/* <form className= 'mealForm' onSubmit={this.handleSubmit}> */}
             <label>
-              Trip Name
-              <input type="text" onChange={this.handleChange} name="trip" />
+              <input placeholder='Trip Name' type="text" onChange={this.handleChange} name="trip" />
             </label>
             {/* <input type="submit" value="Submit" /> */}
             <br/><br/>
 
-            <button onClick={this.handleMeal}>Add new Meal</button>
+            <button className='addmealbutton' onClick={this.handleMeal}>Add New Meal</button>
             <br/><br/>
 
             {meals.map((val, index) => {
@@ -104,19 +103,22 @@ class DailyFood extends React.Component {
                 calId = `cal-${index}`;
               return (
                 <div key={index}>
-                  <label htmlFor={mealId}>{`Meal #${index + 1}`}</label>
+                  <label htmlFor={mealId}></label>
                   <input
                     type="text"
+                    placeholder={`Meal #${index + 1}`}
                     onChange={this.handleChange}
                     name={"meal"}
                     data-id={index}
                     //  id={mealId}
                     className="meal"
                   />
-
-                  <label htmlFor={calId}>Calories</label>
+                    <br/>
+                    <br></br>
+                  <label htmlFor={calId}></label>
                   <input
                     type="text"
+                    placeholder='Calories'
                     onChange={this.handleChange}
                     name={"calories"}
                     data-id={index}
@@ -126,8 +128,9 @@ class DailyFood extends React.Component {
                 </div>
               );
             })}
-            <input type="submit" onClick={this.handleMealSumbit}  value="Submit" />
-          </form>
+            <br/>
+            <input className='submitmealbutton' type="submit" onClick={this.handleMealSumbit}  value="Submit" />
+          {/* </form> */}
         </div>
       </div>
     );

@@ -2,6 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router'
 import axios from 'axios'
 
+
+
 const SaveMeal= ({ meals }) => {
   let history = useHistory()
 
@@ -26,12 +28,16 @@ console.log('meals', meals)
     .catch((error) => {
       console.log(error.response)
     })
+    location.reload();
 
   }
 
     return (
       <div>
-        <button type="button" onClick={handleSave}>Save Your Meal</button>
+
+
+
+        <button className = 'savebutton' type="button"  onClick={handleSave}>Save Your Meal</button>
       </div>
     );
 

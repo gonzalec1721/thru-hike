@@ -40,7 +40,7 @@ const getMeals = function(tripName, callback) {
 
   // const { trip, totalCal, meals } = req
   var hike = tripName
-
+console.log('db', hike)
    pool.query("SELECT * FROM dailymeal WHERE trip = $1", [hike],(error, results) => {
      if (error) {
        throw error
