@@ -10,6 +10,7 @@ class DailyFood extends React.Component {
       toggle: false,
       totalCal: 0,
       trip: '',
+      day: '',
       meals: [{ meal: "", calories: "" }]
     };
     this.handleMeal = this.handleMeal.bind(this);
@@ -36,6 +37,7 @@ class DailyFood extends React.Component {
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
+    this.setState({[e.target.name]: e.target.value })
     this.setState({[e.target.name]: e.target.value })
 
   }
@@ -81,7 +83,10 @@ class DailyFood extends React.Component {
      }
 
     return (
+
+
       <div className='dailyfoodcomp' id ='container'>
+
         <div>
           <h2>Daily Food</h2>
           <h3>Total Calories / Day - {this.state.totalCal}</h3>
@@ -91,18 +96,21 @@ class DailyFood extends React.Component {
           {/* <form className= 'mealForm' onSubmit={this.handleSubmit}> */}
             <label>
               <input placeholder='Trip Name' type="text" onChange={this.handleChange} name="trip" />
+              <br/><br/>
+              <input placeholder='Day' type="text" onChange={this.handleChange} name="day" />
             </label>
             {/* <input type="submit" value="Submit" /> */}
             <br/><br/>
 
             <button className='addmealbutton' onClick={this.handleMeal}>Add New Meal</button>
-            <br/><br/>
+            <br/>
 
             {meals.map((val, index) => {
               let mealId = `meal-${index}`,
                 calId = `cal-${index}`;
               return (
                 <div key={index}>
+                  <br/>
                   <label htmlFor={mealId}></label>
                   <input
                     type="text"
@@ -125,14 +133,19 @@ class DailyFood extends React.Component {
                     //  id={calId}
                     className="calories"
                   />
+                    <br/>
                 </div>
+
               );
+              <br/>
             })}
             <br/>
             <input className='submitmealbutton' type="submit" onClick={this.handleMealSumbit}  value="Submit" />
           {/* </form> */}
         </div>
+
       </div>
+
     );
   }
 }

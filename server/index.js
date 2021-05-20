@@ -33,16 +33,30 @@ db.createMeal(req.body)
 res.status(200).send('sent')
 })
 
+// app.post('/allmeals', (req, res) => {
+
+//  var trip = req.body.tripName
+
+//   db.getMeals(trip, function(trip){
+//     res.status(200).send(trip)
+//   })
+
+// })
+
 app.post('/allmeals', (req, res) => {
 
- var trip = req.body.tripName
+  var trip = [req.body.tripName, req.body.day]
 
-  db.getMeals(trip, function(trip){
-    console.log('server', trip)
-    res.status(200).send(trip)
-  })
 
-})
+   db.getMeals(trip, function(days){
+
+     res.status(200).send(days)
+   })
+
+ })
+
+
+
 
 
 

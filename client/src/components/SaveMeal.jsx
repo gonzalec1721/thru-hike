@@ -13,9 +13,11 @@ const SaveMeal= ({ meals }) => {
    // history.push("/")
   //  console.log('totalCal', meals.totalCal)
   //  console.log('meals', meals.meals)
-console.log('meals', meals)
+
+
    let send = {
      trip: meals.trip,
+     day: meals.day,
      totalCal: meals.totalCal,
      meals: meals.meals
    }
@@ -37,7 +39,7 @@ console.log('meals', meals)
 
 
 
-        <button className = 'savebutton' type="button"  onClick={handleSave}>Save Your Meal</button>
+        <button className = 'savebutton'type="button"  onClick={handleSave}>Save Your Meal</button>
       </div>
     );
 

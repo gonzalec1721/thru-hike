@@ -40,11 +40,13 @@ componentDidUpdate(){
     var output = {}
 var outputMeals = []
     this.props.allmeals.map((el)=>{
-      // console.log(el)
+       console.log(el)
       // this.state.trip = el.trip
       if(output.trip === undefined){
        output.trip = el.trip
        output.totalCal = el.totalcal
+       output.day = el.day
+
       }
       outputMeals.push(el.mealname, el.calpermeal)
 
@@ -57,20 +59,29 @@ this.state.mealInfo.map((eachMeal)=>{
 })
 
     return (
-<>
+<div >
 <br/><br/>
-{'Trip Name  '}{this.state.totalInfo.trip}
+<p>Trip Name: </p>{this.state.totalInfo.trip}
 <br/><br/>
+<p>Total Calories:</p>
 {this.state.totalInfo.totalCal}
+<br/><br/>
+<p>Day:</p>
+{this.state.totalInfo.day}
 <br/><br/>
 <div className='allmeals'>
 {this.state.mealInfo.map((eachMeal, index)=>{
+
   return(
+    <div key={index}>
+
     <h4>{eachMeal}</h4>
+
+    </div>
   )
 })}
 </div>
-</>
+</div>
 
     )
 

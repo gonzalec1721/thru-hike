@@ -19,15 +19,16 @@ const pool = new Pool({
 
 const createMeal = (req, res) => {
  const { trip, totalCal, meals } = req
- console.log('melas', req)
+//  console.log('DB', req)
  req.meals.map((el)=>{
 var trip = req.trip
+var day = req.day
 var totalCal = req.totalCal
 var mealName = el.meal
 var calories = el.calories
 //console.log(trip, totalCal, mealName, calories)
 
-   pool.query('INSERT INTO DailyMeal (Trip, TotalCal, MealName, CalperMeal) VALUES ($1, $2, $3, $4)', [trip, totalCal, mealName, calories], (error, results) => {
+   pool.query('INSERT INTO DailyMeal (Trip, Day, TotalCal, MealName, CalperMeal) VALUES ($1, $2, $3, $4, $5)', [trip, day, totalCal, mealName, calories], (error, results) => {
        if (error) {
            throw error
          }
@@ -40,12 +41,12 @@ const getMeals = function(tripName, callback) {
 
   // const { trip, totalCal, meals } = req
   var hike = tripName
-console.log('db', hike)
-   pool.query("SELECT * FROM dailymeal WHERE trip = $1", [hike],(error, results) => {
+// console.log('db', hike)
+   pool.query("SELECT * FROM dailymeal WHERE trip = $1 AND Day = $2", [hike[0], hike[1]],(error, results) => {
      if (error) {
        throw error
      }
-  //  console.log(results.rows)
+
   callback(results.rows)
    })
  }

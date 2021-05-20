@@ -7,6 +7,7 @@ class AllMeals extends React.Component {
     super(props)
     this.state = {
       trip: '',
+      day:'',
       meals: []
     }
     this.handleChange=this.handleChange.bind(this)
@@ -16,17 +17,23 @@ handleChange(e){
   this.setState({
     [e.target.name]: e.target.value
   })
+  this.setState({
+    [e.target.name]: e.target.value
+  })
+
 }
 
 handleGet(){
-  console.log(this.state.trip)
+
   let trips = {
-    tripName: this.state.trip
+    tripName: this.state.trip,
+    day: this.state.day
   }
-  console.log(trips)
+
 
     axios.post('/allmeals', trips)
   .then((response)=>{
+    console.log('client res', response)
    this.setState({
      meals: response.data
    })
@@ -48,9 +55,14 @@ handleGet(){
     return (
 
 <div id='container'>
+  <h2>Your Meals</h2>
   {/* <form> */}
     <input type='text' placeholder='Name Of Your Trip' onChange={this.handleChange} name='trip'></input>
-    <input type="submit" onClick={this.handleGet} value="Get All Meals" />
+    <br/> <br/>
+    <input type='text' placeholder='Day' onChange={this.handleChange} name='day'></input>
+    <br/> <br/>
+    <input className='getallmealsbutton' type="submit" onClick={this.handleGet} value="Get All Meals" />
+
     <MealsDisplay allmeals={this.state.meals}/>
   {/* </form> */}
 {/* <button>Get All Meals</button> */}
