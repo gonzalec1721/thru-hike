@@ -9,7 +9,7 @@ class MealsDisplay extends React.Component {
       mealInfo: [],
       trip: ''
     }
-
+this.handleEdit = this.handleEdit.bind(this)
   }
 
 componentDidUpdate(){
@@ -34,7 +34,9 @@ componentDidUpdate(){
       }
 
 
-
+handleEdit(){
+  console.log('edit')
+}
 
   render() {
     var output = {}
@@ -66,7 +68,8 @@ this.state.mealInfo.map((eachMeal)=>{
 <p>Total Calories:</p>
 {this.state.totalInfo.totalCal}
 <br/><br/>
-<p>Day:</p>
+<p>Day:  <button onClick={this.handleEdit}>Edit Day</button></p>
+
 {this.state.totalInfo.day}
 <br/><br/>
 <div className='allmeals'>

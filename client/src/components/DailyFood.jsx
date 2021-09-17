@@ -85,7 +85,7 @@ class DailyFood extends React.Component {
     return (
 
 
-      <div className='dailyfoodcomp' id ='container'>
+      <div className='dailyfoodcomp'>
 
         <div>
           <h2>Daily Food</h2>

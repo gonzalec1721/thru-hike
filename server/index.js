@@ -7,7 +7,6 @@ const db = require('../database/queries.js')
 
 
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 const port = 4000;
