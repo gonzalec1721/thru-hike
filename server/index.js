@@ -1,19 +1,14 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
-const bodyParser = require('body-parser');
-const db = require('../database/queries.js')
-
-
-
+const path = require("path");
+const bodyParser = require("body-parser");
+const db = require("../database/queries.js");
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 const port = 4000;
 
-
-
-app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(express.static(path.join(__dirname, "/../client/dist")));
 
 // app.get('/*', function(req, res) {
 //   let trip = req.query.trip
@@ -26,11 +21,11 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 // })
 
-app.post('/dailyfood', function(req, res) {
-//  console.log("REQ.BODY", req.body)
-db.createMeal(req.body)
-res.status(200).send('sent')
-})
+app.post("/dailyfood", function (req, res) {
+  //  console.log("REQ.BODY", req.body)
+  db.createMeal(req.body);
+  res.status(200).send("sent");
+});
 
 // app.post('/allmeals', (req, res) => {
 
@@ -42,22 +37,21 @@ res.status(200).send('sent')
 
 // })
 
-app.post('/allmeals', (req, res) => {
+app.delete("/meal", (req, res) => {
+  let theDeleted = Number(req.query.id);
+  console.log("the", theDeleted);
+  db.deleteMeal(theDeleted, function (suc) {
+    console.log("SUC", suc);
+  });
+});
 
-  var trip = [req.body.tripName, req.body.day]
+app.post("/allmeals", (req, res) => {
+  var trip = [req.body.tripName, req.body.day];
 
-
-   db.getMeals(trip, function(days){
-
-     res.status(200).send(days)
-   })
-
- })
-
-
-
-
-
+  db.getMeals(trip, function (days) {
+    res.status(200).send(days);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server listening at localhost:${port}!`);
