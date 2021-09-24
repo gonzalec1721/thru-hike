@@ -11,13 +11,10 @@ import Home from './Home.jsx'
 import {Route} from "react-router-dom";
 import Navbar from './Navbar.jsx'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
+export default function App() {
 
-  }
 
-  render() {
+
     return (
       <div>
         <div>
@@ -69,7 +66,7 @@ class App extends React.Component {
 //     </Router>
     )
   }
-}
+
 // function Home() {
 //   return (
 //     <div>
@@ -88,4 +85,3 @@ class App extends React.Component {
 //   return <h2>Meals</h2>;
 // }
 
-export default App;
