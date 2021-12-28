@@ -26,7 +26,7 @@ export default function MealsDisplay({ allmeals }) {
     setTotalInfo(output);
     setMealInfo(outputMeals);
   }, [allmeals]);
-
+  console.log('total',totalInfo)
   return (
     <div>
       <br />

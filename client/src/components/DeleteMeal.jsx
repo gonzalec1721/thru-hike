@@ -23,7 +23,8 @@ axios.delete('/meal', { params: { id: send } })
 
     return (
       <div>
-      <button onClick={handleDelete}>Delete</button>
+
+      <button className='deletebutton' onClick={handleDelete}>Delete</button>
       </div>
     )
 

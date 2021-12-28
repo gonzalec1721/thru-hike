@@ -20,7 +20,7 @@ const SaveMeal = ({ meals, trip, days, totalCal }) => {
       .catch((error) => {
         console.log(error.response);
       });
-    //location.reload();
+    location.reload();
   };
 
   return (

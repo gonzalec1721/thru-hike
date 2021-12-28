@@ -19,7 +19,8 @@ export default function AllMeals() {
     });
   };
 
-  const handleGet = () => {
+  const handleGet = (e) => {
+
     let trips = {
       tripName: values.trip,
       day: values.day,
@@ -34,11 +35,7 @@ export default function AllMeals() {
       .catch((error) => {
         console.log(error.response);
       });
-      setValues({
 
-       day: '',
-       trip: ''
-      });
   };
 
   return (
