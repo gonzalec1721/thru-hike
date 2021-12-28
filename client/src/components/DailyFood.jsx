@@ -1,237 +1,189 @@
 import React, { useState, useEffect, useRef } from "react";
-// import AddMeal from "./AddMeal.jsx";
-import SaveMeal from "./SaveMeal.jsx"
 
+import SaveMeal from "./SaveMeal.jsx";
 
+export default function DailyFood() {
+  const stateRed = useRef();
+  const [toggle, setToggle] = useState(false);
+  const [totalCal, setTotalcal] = useState(0);
+  const [trip, setTrip] = useState("");
+  const [day, setDay] = useState("");
+  const [meals, setMeals] = useState([{ meals: "", calorie: "" }]);
 
-export default function DailyFood () {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     toggle: false,
-  //     totalCal: 0,
-  //     trip: '',
-  //     day: '',
-  //     meals: [{ meal: "", calories: "" }]
-  //   };
-
-  // }
-  const stateRed = useRef()
-  const [toggle, setToggle] = useState(false)
-  const [totalCal, setTotalcal] = useState(0)
-  const [trip, setTrip] = useState('')
-  const [day, setDay] = useState('')
-  const [meals, setMeals] = useState([{ meals: "", calorie: "" }])
-useEffect(()=> {
-
-  console.log('use', handleMealSumbit())
-        if(totalCal>= 3000){
-          console.log('inside')
-          setToggle(true)
-
-        }
-      //}
-
-      if(totalCal>=3000){
-        console.log('total')
-        return <SaveMeal/>
-      }
-
-
-
-},[totalCal])
-  // const prevMealRef = useRef();
-
-
-  // useEffect(() => {
-  //   prevMealRef.current = meals;
-
-  // });
-  // console.log(prevMealRef.current)
-  // const prevMeal = prevMealRef.current;
-  // const prevMEALS = usePrevious(meals)
-
-
-  const handleMeal =(e)=> {
-    //function usePrevious(value) {
-      stateRed.current = meals;
-      console.log(stateRed)
-  //     useEffect(() => {
-  //       ref.current = value;
-  //     });
-  //  console.log('ref',ref.current);
-   // }
-
-    // this.setState((prevState) => ({
-    //   meals: [...prevState.meals, { meal: "", calories: "" }],
-    // }));
+  function usePrevious(meals) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = meals;
+    });
+    return ref.current;
   }
+  let prevMeal = usePrevious(meals);
 
-  // const handleSubmit =(e) =>{
-  //   e.preventDefault();
-  // }
-
- const handleChange = (e) => {
-  console.log('handle', e.target.name)
-  const nameArr = ["meals", "calorie"]
-  console.log('meals-1', meals)
-    if (nameArr.includes(e.target.name)) {
-      console.log('meals', meals)
-      // let meals = [...meals];
-      setMeals([...meals])
-      console.log('meals2', meals)
-      console.log('meals3', meals[e.target.dataset.id][e.target.className])
-      meals[e.target.dataset.id][e.target.className] = e.target.value;
-      setMeals(meals)
-    } else if(e.target.name === 'trip' ) {
-     setTrip( e.target.value );
-     console.log('trip', trip)
-    } else if(e.target.name === 'day') {
-      setDay(e.target.value)
-      console.log('day', day)
+  useEffect(() => {
+    console.log("use", handleMealSumbit());
+    if (totalCal >= 3000) {
+      console.log("inside");
+      setToggle(true);
     }
-    // console.log(e.target.value)
-    // setTrip(e.target.value )
-    // setDay( e.target.value )
 
+    if (totalCal >= 3000) {
+      console.log("total");
+      return <SaveMeal />;
+    }
+  }, [totalCal]);
+
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = meals;
+    }, [meals]);
+
+    return ref.current;
   }
 
-  const handleMealSumbit=()=>{
-    console.log('mealsub', meals)
-    var output = []
-    meals.map((number)=>{
-      output.push(Number(number.calorie))
+  const handleMeal = (e) => {
+    stateRed.current = meals;
+    setMeals(meals);
 
-    })
+    setMeals([...prevMeal, { meals: "", calorie: "" }]);
+  };
 
-let sum = 0;
-for(let i = 0; i < output.length; i++){
-  sum+=output[i]
-}
-console.log('SUM', sum)
-setTotalcal(sum)
-return sum
-// setTotalcal(sum)
-  //   console.log('out', output)
-  //  var sum = output.reduce((a, b) => a + b, 0)
+  const handleChange = (e) => {
+    const nameArr = ["meals", "calorie"];
 
+    if (nameArr.includes(e.target.name)) {
+      setMeals([...meals]);
 
+      meals[e.target.dataset.id][e.target.className] = e.target.value;
+      setMeals(meals);
+    } else if (e.target.name === "trip") {
+      setTrip(e.target.value);
+    } else if (e.target.name === "day") {
+      setDay(e.target.value);
+    }
+  };
 
-// useEffect(()=> {
-//   setTotalcal(sum)
-// }, [sum])
-//   //  , ()=> {
-//   console.log('tot', totalCal)
+  const handleMealSumbit = () => {
+    var output = [];
+    meals.map((number) => {
+      output.push(Number(number.calorie));
+    });
 
+    let sum = 0;
+    for (let i = 0; i < output.length; i++) {
+      sum += output[i];
+    }
 
-  }
-// useEffect(()=> {
+    setTotalcal(sum);
+    return sum;
+  };
 
-// })
-  // componentDidUpdate(){
-  //   if(this.state.totalCal >= 3000){
-  //     return(
-  //      <SaveMeal/>
-  //     )
-  //   }
-
-  // }
-
-
-
-  // render() {
-    // let calMet = toggle
-    // //let button = 0
-    // if(calMet) {
-    //   console.log('CALMET')
-    //  let button =
-    // }
-
-     console.log('meals', meals)
-    return (
-
-
-      <div className='dailyfoodcomp'>
-
-        <div>
-          <h2>Daily Food</h2>
-          <h3>Total Calories / Day - {totalCal}</h3>
-          {toggle ? (<div><SaveMeal trip={trip} days={day} meals={meals}/></div>) : ''}
-        </div>
-        <div>
-          {/* <form className= 'mealForm' onSubmit={this.handleSubmit}> */}
-            <label>
-              <input placeholder='Trip Name' type="text" onChange={handleChange} name="trip" />
-              <br/><br/>
-              <input placeholder='Day' type="text" onChange={handleChange} name="day" />
-            </label>
-            {/* <input type="submit" value="Submit" /> */}
-            <br/><br/>
-
-            <button className='addmealbutton' onClick={handleMeal}>Add New Meal</button>
-            <br/>
-
-            {meals.map((val, index) => {
-              let mealId = `meal-${index}`,
-                calId = `cal-${index}`;
-              return (
-                <div key={index}>
-                  <br/>
-                  <label htmlFor={mealId}></label>
-                  <input
-                    type="text"
-                    placeholder={`Meal #${index + 1}`}
-                    onChange={handleChange}
-                    name={"meals"}
-                    data-id={index}
-                    //  id={mealId}
-                    className="meals"
-                  />
-                    <br/>
-                    <br></br>
-                  <label htmlFor={calId}></label>
-                  <input
-                    type="text"
-                    placeholder='Calories'
-                    onChange={handleChange}
-                    name={"calorie"}
-                    data-id={index}
-                    //  id={calId}
-                    className="calorie"
-                  />
-                    <br/>
-                </div>
-
-              );
-              <br/>
-            })}
-            <br/>
-            <input className='submitmealbutton' type="submit" onClick={handleMealSumbit}  value="Submit" />
-          {/* </form> */}
-        </div>
-
+  return (
+    <div className="dailyfoodcomp">
+      <div>
+        <h2>Daily Food</h2>
+        <h3>Total Calories / Day - {totalCal}</h3>
+        {toggle ? (
+          <div>
+            <SaveMeal
+              totalCal={totalCal}
+              trip={trip}
+              days={day}
+              meals={meals}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
+      <div>
+        {/* <form className= 'mealForm' onSubmit={this.handleSubmit}> */}
+        <label>
+          <input
+            placeholder="Trip Name"
+            type="text"
+            onChange={handleChange}
+            name="trip"
+          />
+          <br />
+          <br />
+          <input
+            placeholder="Day"
+            type="text"
+            onChange={handleChange}
+            name="day"
+          />
+        </label>
+        {/* <input type="submit" value="Submit" /> */}
+        <br />
+        <br />
 
-    );
-  }
+        <button className="addmealbutton" onClick={handleMeal}>
+          Add New Meal
+        </button>
+        <br />
 
-  // function usePrevious(value) {
-  //   // The ref object is a generic container whose current property is mutable ...
-  //   // ... and can hold any value, similar to an instance property on a class
-  //   const ref = useRef();
-  //   // Store current value in ref
-  //   useEffect(() => {
-  //     ref.current = value;
-  //   }, [value]); // Only re-run if value changes
-  //   // Return previous value (happens before update in useEffect above)
-  //   return ref.current;
-  // }
+        {meals.map((val, index) => {
+          let mealId = `meal-${index}`,
+            calId = `cal-${index}`;
+          return (
+            <div key={index}>
+              <br />
+              <label htmlFor={mealId}></label>
+              <input
+                type="text"
+                placeholder={`Meal #${index + 1}`}
+                onChange={handleChange}
+                name={"meals"}
+                data-id={index}
+                //  id={mealId}
+                className="meals"
+              />
+              <br />
+              <br></br>
+              <label htmlFor={calId}></label>
+              <input
+                type="text"
+                placeholder="Calories"
+                onChange={handleChange}
+                name={"calorie"}
+                data-id={index}
+                //  id={calId}
+                className="calorie"
+              />
+              <br />
+            </div>
+          );
+          <br />;
+        })}
+        <br />
+        <input
+          className="submitmealbutton"
+          type="submit"
+          onClick={handleMealSumbit}
+          value="Submit"
+        />
+        {/* </form> */}
+      </div>
+    </div>
+  );
+}
 
+// function usePrevious(value) {
+//   // The ref object is a generic container whose current property is mutable ...
+//   // ... and can hold any value, similar to an instance property on a class
+//   const ref = useRef();
+//   // Store current value in ref
+//   useEffect(() => {
+//     ref.current = value;
+//   }, [value]); // Only re-run if value changes
+//   // Return previous value (happens before update in useEffect above)
+//   return ref.current;
+// }
 
 // import React, { useState } from "react";
 // // import AddMeal from "./AddMeal.jsx";
 // import SaveMeal from "./SaveMeal.jsx"
-
 
 // class DailyFood extends React.Component {
 //   constructor(props) {
@@ -291,8 +243,6 @@ return sum
 //         }
 //       })
 
-
-
 //   }
 
 //   componentDidUpdate(){
@@ -304,8 +254,6 @@ return sum
 
 //   }
 
-
-
 //   render() {
 //     let { meals } = this.state;
 //       let calMet = this.state.toggle
@@ -315,7 +263,6 @@ return sum
 //      }
 
 //     return (
-
 
 //       <div className='dailyfoodcomp'>
 

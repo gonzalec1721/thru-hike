@@ -18,14 +18,17 @@ const pool = new Pool({
 });
 
 const createMeal = (req, res) => {
-  const { trip, totalCal, meals } = req;
-  console.log("DB", req);
-  req.meals.map((el) => {
+  const { trip, day, allMealInfo, totalCal } = req;
+  console.log("DayB", req.trip);
+  console.log("DBtrip", req.day);
+  console.log("DBall", req.allMealInfo);
+
+  req.allMealInfo.map((el) => {
     var trip = req.trip;
     var day = req.day;
     var totalCal = req.totalCal;
     var mealName = el.meals;
-    var calories = el.calories;
+    var calories = el.calorie;
     //console.log(trip, totalCal, mealName, calories)
 
     pool.query(

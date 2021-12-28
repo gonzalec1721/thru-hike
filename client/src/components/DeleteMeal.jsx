@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export default class DeleteMeal extends Component {
-  constructor(props) {
-    super(props);
-    this.state= {
-
-    }
-    this.handleDelete = this.handleDelete.bind(this)
-  }
+export default function DeleteMeal ({tripInfo, mealInfo}){
+  console.log('DELETE',tripInfo)
 
 
-  handleDelete(e) {
-let send = this.props.tripInfo.id
+ const handleDelete = (e)=>  {
+
+let send = tripInfo.id
 
 console.log('del')
 axios.delete('/meal', { params: { id: send } })
@@ -23,15 +18,14 @@ axios.delete('/meal', { params: { id: send } })
     console.log(error)
   })
   }
-  render() {
 
 
-console.log('delete', this.props)
+
     return (
       <div>
-      <button onClick={this.handleDelete}>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
       </div>
     )
-  }
+
 }
 
