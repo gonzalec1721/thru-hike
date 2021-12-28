@@ -19,12 +19,12 @@ const pool = new Pool({
 
 const createMeal = (req, res) => {
   const { trip, totalCal, meals } = req;
-  //  console.log('DB', req)
+  console.log("DB", req);
   req.meals.map((el) => {
     var trip = req.trip;
     var day = req.day;
     var totalCal = req.totalCal;
-    var mealName = el.meal;
+    var mealName = el.meals;
     var calories = el.calories;
     //console.log(trip, totalCal, mealName, calories)
 

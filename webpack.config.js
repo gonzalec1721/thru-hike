@@ -1,11 +1,11 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './client/src/index.jsx',
+  entry: "./client/src/index.jsx",
   mode: "development",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, './client/dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "./client/dist"),
     // publicPath: '/'
   },
 
@@ -15,18 +15,18 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
 
           options: {
-
-            presets: ['@babel/preset-react', '@babel/preset-env']
-          }
-        }
-      }
-    ]
+            presets: ["@babel/preset-react", "@babel/preset-env"],
+            plugins: [["@babel/plugin-proposal-class-properties"]],
+          },
+        },
+      },
+    ],
   },
+
   // devServer: {
   //   historyApiFallback: true,
   // },
-
 };

@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "/../client/dist")));
 // })
 
 app.post("/dailyfood", function (req, res) {
-  //  console.log("REQ.BODY", req.body)
+  console.log("REQ.BODY", req.body);
   db.createMeal(req.body);
   res.status(200).send("sent");
 });
