@@ -9,7 +9,8 @@ export default function DeleteMeal ({tripInfo, mealInfo}){
 
 let send = tripInfo.id
 
-console.log('del')
+console.log('del', tripInfo)
+
 axios.delete('/meal', { params: { id: send } })
   .then((res) => {
     console.log(res)

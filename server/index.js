@@ -38,10 +38,16 @@ app.post("/dailyfood", function (req, res) {
 // })
 
 app.delete("/meal", (req, res) => {
-  let theDeleted = Number(req.query.id);
-  console.log("the", theDeleted);
-  db.deleteMeal(theDeleted, function (suc) {
-    console.log("SUC", suc);
+  let params = req.query.id;
+  let idsToDelete = [];
+  console.log(params);
+  for (let i = 0; i < params.length; i++) {
+    idsToDelete.push(Number(params[i]));
+  }
+  console.log("idstodelete", idsToDelete);
+
+  db.deleteMeal(idsToDelete, function (suc) {
+    console.log("Delete successful", suc);
   });
 });
 

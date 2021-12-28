@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DeleteMeal from "./DeleteMeal.jsx";
 
 export default function MealsDisplay({ allmeals }) {
+  console.log('allmeals', allmeals)
   const [totalInfo, setTotalInfo] = useState({});
   const [mealInfo, setMealInfo] = useState([]);
 
@@ -11,18 +12,22 @@ export default function MealsDisplay({ allmeals }) {
   };
 
   useEffect(() => {
-    var output = {};
+    var output = {
+      id: []
+    };
     var outputMeals = [];
 
     allmeals.map((el) => {
-      if (output.trip === undefined) {
-        output.id = el.id;
+      //if (output.trip === undefined) {
+
+        output.id.push(el.id)
         output.trip = el.trip;
         output.totalCal = el.totalcal;
         output.day = el.day;
-      }
+     // }
       outputMeals.push(el.mealname, el.calpermeal);
     });
+    console.log('OUT',output)
     setTotalInfo(output);
     setMealInfo(outputMeals);
   }, [allmeals]);

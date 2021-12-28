@@ -62,11 +62,18 @@ const getMeals = function (tripName, callback) {
 };
 
 const deleteMeal = function (id, cb) {
-  pool.query("DELETE FROM dailymeal WHERE id = $1", [id], (error, results) => {
-    if (error) {
-      console.log(error);
-    }
-    cb("Deleted");
+  id.map((el) => {
+    console.log("ID", el);
+    pool.query(
+      "DELETE FROM dailymeal WHERE id = $1",
+      [el],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+        }
+        cb("Deleted");
+      }
+    );
   });
 };
 
